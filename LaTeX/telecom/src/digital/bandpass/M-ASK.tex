@@ -1,0 +1,91 @@
+%\clearpage
+%//==============================--@--==============================//%
+\subsection[5.1 ASK (\textit{Amplitude-Shift Keying})]{$\rightarrow$ ASK (\textit{Amplitude-Shift Keying})}
+\label{subsec:M-ASK}
+
+\begin{mdframed}
+Uma sequência $\xi$ de $K$ símbolos é transportada pelo sinal
+$$
+    v_\xi(t) = \mathbb{R}e\mathbb{e}\left\{ \sum_{k=0}^{K-1} \xi_k\, s(t-kT) \right\},\quad 0 \leq t \leq KT
+$$
+em que as variáveis aleatórias $\xi_k$ tomam valores no conjunto de amplitudes equi-espaçadas $\left\{ a_i \right\}_{i=1}^{M}$, dadas por (código polar e unipolar respetivamente)
+$$
+    a_i = (2i - 1 - M)\,\frac{d}{2} \;\lor\; a_i = (2i-M)\,d,\quad i = 1,2,\dots,M
+$$
+Consequentemente, as formas de onda utilizadas pelo modulador são somente múltiplos escalares de uma única onda. Se $s(t)$ for um pulso de energia unitária, representa um sinal base da expansão ortonormada, o que leva à conclusão de que o sinal conjunto, é \underline{uni-dimensional}.
+\end{mdframed}
+%//==============================--@--==============================//%
+\subsubsection[5.1.1 Probabilidade de erro (código polar)]{$\rightarrow$ Probabilidade de erro (código polar)}
+{\small
+A probabilidade de erro de símbolo da ASK para uma deteção coerente, pode ser aferida explicitamente se a probabilidade de uma decisão correta for conhecida
+$$
+    P(c) = \frac{1}{M}[2q_1 + (M-2)q_2]
+$$
+em que $q_1$ é a probabilidade da decisão correta para os dois pontos exteriores da constelação, e $q_2$ é a probabilidade de decisão correta para os restantes $(M-2)$ pontos interiores. Definindo
+$$
+    p = \frac{1}{2}\, \text{erfc}\left(\frac{d}{2\sqrt{N_0}}\right)
+$$
+temos que $q_1 = 1 - p$ e $q_2 = 1 - 2p$. Assim,
+$$
+    P(c) = 1 - 2p\frac{M-1}{M}
+$$
+e finalmente
+$$
+    P(e) = \frac{M-1}{M}\, \text{erfc}\left(\frac{d}{2\sqrt{N_0}}\right).
+$$
+Para exprimir $P(e)$ em função de $E$, aproveita-se o facto de que a energia média\footnotemark[4] do símbolo é dada por
+$$
+    E = \frac{1}{M} \sum_{i=1}^{M} a_i^2 = \frac{d^2}{4M} \sum_{i=1}^{M} (2i - 1 - M)^2 = \frac{M^2-1}{12}\, d^2
+$$
+Então, dado que $E = \log_2(M)\, E_b$,
+$$
+    \therefore P(e) = \frac{M-1}{M}\, \text{erfc}\left( \sqrt{\frac{3\log_2(M)}{M^2-1}\frac{E_b}{N_0}} \right)
+$$
+}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[4]{%
+    A \textit{power efficiency} assintótica é o factor multiplicativo de $E_b/N_0$ no argumento da $\text{erfc}(\cdot)$. Assim,
+    $$
+        \gamma_{\text{ASK}} = \frac{3\log_2(M)}{M^2-1} 
+    $$
+    que se verifica decrescente para valores de $M$ cada vez maiores.
+}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+\footnotetext[4]{%
+    Em PAM/ASK, a energia média transmitida difere da \textit{peak energy} $E_p = (M-1)^2 d^2/4$, que é a energia do sinal de máxima amplitude. Verifica-se que $E_p/E = 3 (M-1)/(M+1)$.
+}
+%//==============================--@--==============================//%
+\subsubsection[5.1.2 Probabilidade de erro (código unipolar)]{$\rightarrow$ Probabilidade de erro (código unipolar)}
+{\small
+Partindo novamente de 
+$$
+    P(e) = \frac{M-1}{M}\, \text{erfc}\left( \frac{d}{2\sqrt{N_0}} \right)
+$$
+Neste caso o valor da energia média do símbolo é dada por
+$$
+    E = \frac{1}{M} \sum_{i+1}^{M} a_i^2 = \frac{d^2}{4M} \sum_{i+1}^{M} (2i-M)^2 = \frac{M^2+2}{12}d^2
+$$
+Desta forma
+$$
+    P(e) = \frac{M-1}{M}\, \text{erfc}\left( \sqrt{\frac{3 \log_2(M)}{M^2+2} \frac{E_b}{N_0}} \right)
+$$
+}
+%//==============================--@--==============================//%
+\subsubsection[5.1.3 Espectro de potência e eficiência espectral]{$\rightarrow$ Espectro de potência e eficiência espectral}
+
+A densidade espectral de potência do sinal ASK $v_\xi(t)$ é dada por
+$$
+    S_{v_\xi}(f) = \frac{E}{T}\left|S(f)\right|^2
+$$
+onde $S(f)$ denota a Transformada de Fourier de $s(t)$.
+
+\vspace{0.5em}
+\noindent A largura de banda de Shannon para esta modulação é $W = 1/2T$, e então, a eficiencia espectral é dada por
+$$
+    \left(\frac{R_s}{W}\right)_{\text{ASK}} = 2 \log_2(M)
+$$
+
+\vspace{0.5em}
+\noindent Conclui-se que para ASK, ao aumentar o valor de $M$ ocorre uma melhoria da eficiência espectral, no entanto, ocorre também uma diminuição da \textit{power efficiency}.
+%//==============================--@--==============================//%

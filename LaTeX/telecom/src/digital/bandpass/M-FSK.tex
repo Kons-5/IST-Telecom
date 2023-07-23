@@ -1,0 +1,75 @@
+\clearpage
+%//==============================--@--==============================//%
+\subsection[5.4 FSK (\textit{Frequency-Shift Keying})]{$\rightarrow$ FSK (\textit{Frequency-Shift Keying})}
+\label{subsec:M-FSK}
+
+\begin{mdframed}
+    Este é um esquema de modulação não linear em que os símbolos fonte determinam a frequência de uma portadore de envelope constante. Especificamente, assume-se que o modulador consiste num conjunto de $M$ osciladores sintonizados às frequências desejadas. 
+
+    Uma sequência de $K$ símbolos é representada pelo sinal
+    $$
+    v_\xi(t) = \mathbb{R}e\left\{ \sum_{k=0}^{K-1} s(t-kT) e^{j2\pi f_d \xi_k(t-kT)} e^{j2\pi f_c t} \right\},\quad 0 \leq t \leq KT
+    $$
+    onde as VA's discretas $\xi_k$ tomam valores no conjunto $\{2i-1-M\}_{i=1}^{M}$, e portanto, $2f_d$ é a separação entre frequências adjacentes.
+
+    O transmissor utiliza os sinais
+    \begin{align*}
+        s_i(t) &= A \cos(2\pi f_i t), \qquad\qquad\quad\; 0 \leq t \leq T \\
+        f_i &= f_c + (2i-1-M)f_d, \qquad i = 1,2,\dots,M 
+    \end{align*}
+    que têm energia comum, $E=A^2T/2$, e um envelope constante.
+
+    \vspace{0.75em}
+    \noindent Os sinais podem ser feitos ortogonais, ao escolher uma separação de frequências apropriada. Temos,
+    \begin{align*}
+        \int_{0}^{T} s_n(t) s_m(t)\, dt &= A^2 \int_{0}^{T} \cos(2\pi f_n t) \cos(2\pi f_m t) \, dt \\
+        &= \frac{A^2}{2} \int_{0}^{T} \cos(2\pi[f_n + f_m]t)\, dt +  \frac{A^2}{2} \int_{0}^{T} \cos(2\pi[f_n - f_m]t)\, dt \\
+        &= \cancel{\frac{A^2 T}{2} \frac{\sin(2\pi [f_n + f_m] T)}{2\pi [f_n + f_m] T}} + \frac{A^2 T}{2} \frac{\sin(2\pi [f_n - f_m] T)}{2\pi [f_n - f_m] T} \\
+        &= \frac{A^2 T}{2} \frac{\sin(4\pi [n - m]f_d T)}{4\pi [n - m]f_d T}
+    \end{align*}
+    Assumimos que o produto $f_c T$ da frequência da portadora e do intervalo de símbolo é tão grande que o primeiro termo da expressão anterior pode ser descartado (\textit{bandpass assumption}). Desta forma, o produto escalar das duas formas de onda é nulo quando $4\pi f_d T$ é um multiplo não nulo de $\pi$. A menor separação que produz um par de sinais ortogonais é
+    $$
+        2 f_d = \frac{1}{2T}
+    $$
+\end{mdframed}
+
+%//==============================--@--==============================//%
+\subsubsection[5.4.1 Probabilidade de erro]{$\rightarrow$ Probabilidade de erro}
+
+Com base na \textit{union bound}, temos o seguinte limite superior para a probabilidade de erro de símbolo
+$$
+    P(e) \leq \frac{M-1}{2}\, \text{erfc}\left( \sqrt{\frac{\log_2(M)}{2}\frac{E_b}{N_0}} \right)
+$$
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[4]{%
+    A \textit{power efficiency} assintótica da modulação FSK é 
+    $$
+        \gamma_{\text{FSK}} = \frac{1}{2} \log_2(M)
+    $$
+    que, ao contrário das modulações previamente observadas, se verifica \underline{crescente} para valores de $M$ cada vez maiores.
+}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+%//==============================--@--==============================//%
+\newpage
+\subsubsection[5.4.2 Espectro de potência e eficiência espectral]{$\rightarrow$ Espectro de potência e eficiência espectral}
+
+O espectro de potência é dado por
+$$
+    \pmb{\dots}
+$$
+
+\vspace{0.75em}
+Neste caso, $N=M$, portanto a largura de banda de Shannon deste esquema de modulação é $W=M/2T$, e a sua eficiência espectral é dada por
+$$
+    \left(\frac{R_s}{W}\right)_{\text{FSK}} = 2\frac{\log_2(M)}{M}
+$$
+Note-se que ao contrário dos esquemas anteriores (ASK, PSK e QAM), ao aumentar $M$, a eficiência espectral do FSK ortogonal \underline{diminui}. Por outro lado, a \textit{power efficiency} aumenta.
+
+%//==============================--@--==============================//%
+\subsubsection[5.4.3 Exercícios]{$\pmb{\rightarrow}$ Exercícios}
+\paragraph[5.4.3.1 ]{$\pmb{\star}$ }\mbox{}\\
+
+
+%//==============================--@--==============================//%

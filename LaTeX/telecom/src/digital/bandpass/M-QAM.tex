@@ -1,0 +1,69 @@
+\clearpage
+%//==============================--@--==============================//%
+\subsection[5.3 QAM (\textit{Quadrature Amplitude Modulation})]{$\rightarrow$ QAM (\textit{Quadrature Amplitude Modulation})}
+\label{subsec:M-QAM}
+
+\begin{mdframed}
+    Este é um esquema linear, em que os símbolos determinam a amplitude e a fase do sinal portadora. Ao contrário do esquema PSK, o envelope não é constante. Uma sequência $\xi$ de $K$ símbolos é representada pelo sinal
+    $$
+        v_{\xi}(t) = \mathbb{R}e\left\{ \sum_{k=0}^{K-1} \xi_k s(t-kT) e^{j2\pi f_0 t} \right\},\quad 0 \leq t \leq KT
+    $$
+    em que a VA discreta $\xi_k$ é definida como
+    $$
+        \xi_k \delequal \xi_k^{'} + \xi_k^{''} = A_k e^{j\phi_k} 
+    $$
+    e $s(t)$ é um sinal de banda base complexo de duração $T$. No caso de $s(t) = u_T(t)$, podemos reescrever a expressão como
+    $$
+         v_{\xi}(t) = \sum_{k=0}^{K-1} \{ \xi_k^{'} \cos(2\pi f_0 t) - \xi_k^{''} \sin(2\pi f_0 t) \} u_T(t)
+    $$
+    que exprime o sinal transmitido na forma de uma série de portadoras---par ortogonal---moduladas pelo conjunto de amplitudes discretas. Esta família de constelações do sinal é bi-dimensional, e o modulador e desmodulador tomam a mesma estrutura do PSK. 
+\end{mdframed}
+
+%//==============================--@--==============================//%
+\subsubsection[5.3.1 Probabilidade de erro]{$\rightarrow$ Probabilidade de erro}
+
+Um limite superior fácil para a $P(e)$ (útil para valores altos de $M$, e $E_b/N_0$ muito grandes), pode ser obtida por 
+$$
+    P(e) \leq 2\, \text{erfc}\left( \sqrt{\frac{3 \log_2(M)}{2(M-1)}\frac{E_b}{N_0}} \right)
+$$
+em que 
+$$
+    E = \frac{M-1}{6}\, d^2
+$$
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[4]{%
+    A \textit{power efficiency} assintótica da modulação QAM é 
+    $$
+        \gamma_{\text{QAM}} = \frac{3}{2} \frac{\log_2(M)}{M-1}
+    $$
+    que se verifica decrescente para valores de $M$ cada vez maiores.
+}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+%//==============================--@--==============================//%
+\subsubsection[5.3.2 Espectro de potência e eficiência espectral]{$\rightarrow$ Espectro de potência e eficiência espectral}
+
+A densidade espectral de potência do sinal QAM é dada por
+$$
+    S_{v_\xi}(f) = \frac{\mathbb{E}[|\xi_k|^2]}{T}\left|\tilde{S}(f)\right|^2
+$$
+em que $\tilde{S}(f)$ denota a Transformada de Fourier do sinal complexo $\tilde{s}(t)$.
+
+\vspace{0.5em}
+\noindent Dado que $N=2$, a largura de banda de Shannon para esta modulação é $W = 1/T$, e então, a eficiencia espectral é dada por (igual a PSK)
+$$
+    \left(\frac{R_s}{W}\right)_{\text{ASK}} = \log_2(M)
+$$
+
+\vspace{0.5em}
+\noindent Conclui-se que para QAM, ao aumentar o valor de $M$ ocorre uma melhoria na eficiência da largura de banda, no entanto, ocorre também uma diminuição da \textit{power efficiency}.
+
+%//==============================--@--==============================//%
+\newpage
+\subsubsection[5.3.3 Exercícios]{$\pmb{\rightarrow}$ Exercícios}
+\paragraph[5.3.3.1 ]{$\pmb{\star}$ }\mbox{}\\
+
+
+
+%//==============================--@--==============================//%

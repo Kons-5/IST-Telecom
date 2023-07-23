@@ -1,0 +1,268 @@
+%//==============================--@--==============================//%
+\subsection{1.1 Classificação de sinais}
+\label{subsec:signal-classification}
+
+\begin{mdframed}
+    \begin{enumerate}[leftmargin=2em]
+        \item[$\pmb{\star}$] Um sinal $x(t)$ diz-se \textit{deterministico} se, $\forall t$, o valor de $x(t)$ é real ou complexo.
+        \item[$\pmb{\star}$] Um sinal $x(t)$ diz-se \textit{aleatório} ou \textit{estocástico} se, $\forall t$, o valor de $x(t)$ é uma variável aleatória; isto é, é definido por uma função densidade de probabilidade.
+        \item[$\pmb{\star}$] Um sinal $x(t)$ diz-se periódico se verificar:
+        $$
+            x(t+kT) = x(t),\quad \forall t \in \mathbb{R},\quad \forall k \in \mathbb{Z}
+        $$
+        onde $T$ é definido como o período do sinal. Um sinal que não verifique esta propriedade, diz-se \textit{aperiódico}.
+        \item[$\pmb{\star}$] Um sinal diz-se um \textit{sinal de energia} se a sua energia
+        $$
+            E_x = \int_{-\infty}^{+\infty} \left| x(t) \right|^2\, dt
+        $$
+        for finita.
+        \item[$\pmb{\star}$] Um sinal diz-se um \textit{sinal de potência} se a sua potência
+        $$
+            P_x = \lim_{L \to +\infty} \frac{1}{L} \int_{-L/2}^{+L/2} \left| x(t) \right|^2\, dt
+        $$
+        for finita. Para um sinal periódico $x(t)$, de período $T$, a potência é dada por:
+        $$
+            P_x = \lim_{n\to +\infty} \frac{E_x}{nT} = \frac{1}{T} \int_{T} \left| x(t) \right|^2\, dt
+        $$
+    \end{enumerate}
+\end{mdframed}
+
+%//==============================--@--==============================//%
+\subsubsection{1.1.1 Alguns sinais importantes}
+\label{subsubsec:some-important-signals}
+
+\begin{mdframed}
+    \begin{enumerate}[leftmargin=2em]
+        \item[$\pmb{\star}$] \textbf{Sinal sinusoidal:}
+            $$
+                x(t) = A \cos{(2\pi f_0 t + \theta)}
+            $$
+        É um sinal com potência dada por $P_x = A^2/2$.
+        \item[$\pmb{\star}$] \textbf{Pulso rectangular:}
+            $$
+                x(t) = \text{rect}(\frac{t-t_0}{T}) = \Pi(\frac{t-t_0}{T}) \delequal
+                \begin{cases}
+                    1 & \text{se}\, \left| t-t_0 \right| \leq T/2 \\
+                    0 & \text{se}\, \left| t-t_0 \right| > T/2
+                \end{cases}
+            $$
+        É um sinal com energia dada por $E_x = T$.
+        \item[$\pmb{\star}$] \textbf{Pulso triangular:}
+            $$
+                x(t) = \text{tri}(\frac{t-t_0}{T}) = \Lambda(\frac{t-t_0}{T}) \delequal
+                \begin{cases}
+                    1 - \left|t-t_0\right|/T & \text{se}\, \left| t-t_0 \right| \leq T/2 \\
+                    0 & \text{se}\, \left| t-t_0 \right| > T/2
+                \end{cases}
+            $$
+        É um sinal com energia dada por $E_x = 2T/3$.
+        \item[$\pmb{\star}$] \textbf{Sinal sinc\footnotemark[1]:}
+            $$
+                x(t) = \text{sinc}(t) \delequal 
+                \begin{cases}
+                    \sin(\pi t)/\pi t & \text{se}\; t \neq 0\\
+                    1 & \text{se}\; t = 0
+                \end{cases}
+            $$
+        É um sinal de energia unitária, i.e., $E_x = 1$.
+    \end{enumerate}
+\end{mdframed}
+
+\footnotetext[1]{Alguns livros definem uma função similar: $\text{Sa}(t) \delequal \sin(t)/t$, desta forma, $\text{sinc}(t) = \text{Sa}(\pi t)$.}
+
+\noindent $\pmb{\star}$ \textbf{Sinal delta ou impulso de Dirac:}
+
+\noindent Relembrando Sinais e Sistemas, $\delta(t)$ é uma função generalizada que pode ser definida por (\textit{sifting property}):
+$$
+    \int_{\mathbb{R}} x(t)\delta(t-t_0) = x(t_0)
+$$
+(Para $x(t) \equiv 1$, verifica $\int_{\mathbb{R}} \delta(t-t_0) = 1$).
+\\\\
+Uma dilatação ou contração temporal, resulta em:
+$$
+    \delta(at) = \frac{1}{|a|}\delta(t), \qquad a \in \mathbb{C}
+$$
+O integral do impulso de Dirac é o degrau unitário:
+$$
+    u(t) \delequal \int_{-\infty}^{t} \delta(\lambda)\, d\lambda =
+    \begin{cases}
+        0 & \text{se}\; t < 0 \\
+        1 & \text{se}\; t > 0
+    \end{cases}
+$$
+Dualmente, a derivada do degrau unitário é:
+$$
+    \frac{d u(t)}{dt} \delequal \delta(t)
+$$
+
+%//==============================--@--==============================//%
+\subsubsection{1.1.2 Correlação de sinais}
+\label{subsubsec:correlation-of-two-signals}
+
+A correlação (\textit{cross-correlation}) de dois sinais, $x(t)$ e $y(t)$, é dada por:
+$$
+    R_{xy}(\tau) \delequal \int_{\mathbb{R}} x(t)y^{*}(t-\tau)\, dt
+$$
+É uma medida da similaridade entre sinais. 
+
+Caso $x(t) = y(t)$, define-se a função de autocorrelação:
+$$
+    R_{x}(\tau) \delequal \int_{\mathbb{R}} x(t)x^{*}(t-\tau)\, dt
+$$
+Particularmente, se $\tau = 0$ verifica-se $\rightarrow R_{x}(\tau = 0) = E_x$. 
+
+\vspace{-1em}
+\noindent{\begin{center}\rule{8cm}{1pt} \end{center}} 
+
+\vspace{-0.5em}
+\noindent Dado um sinal de potência $z(t)$, define-se a sua média temporal como:
+$$
+    \left<z(t)\right>\;\, \delequal \lim_{L\to +\infty} \frac{1}{L} \int_{-L/2}^{L/2} z(t)\, dt 
+$$
+Define-se então, a correlação entre dois sinais de potência, $x(t)$ e $y(t)$, como 
+$$
+    R_{xy}(\tau) =\;\, \left<x(t)y^{*}(t-\tau)\right>\;\, \delequal \lim_{L\to +\infty} \frac{1}{L} \int_{-L/2}^{L/2} x(t)y^{*}(t-\tau)\, dt 
+$$
+Novamente, no caso particular em que $x(t) = y(t)$, obtemos a função de autocorrelação:
+$$
+    R_{x}(\tau) =\;\, \left<x(t)x^{*}(t-\tau)\right>\;\, \delequal  \lim_{L\to +\infty} \frac{1}{L} \int_{-L/2}^{L/2} x(t)x^{*}(t-\tau)\, dt 
+$$
+Quando $x(t)$ é periódico com período $T$, temos
+$$
+    R_{x}(\tau) \delequal \frac{1}{T} \int_{T} x(t)x^{*}(t-\tau)\, dt 
+$$
+
+\noindent A função de autocorrelação de sinais de energia $[$potência$]$ (reais) verifica:
+\begin{enumerate}\footnotesize
+    \item[$\pmb{\star}$] $R_x(\tau = 0) = S$, onde $S$ representa a energia $[$potência média$]$ do sinal $x(t)$.
+    \item[$\pmb{\star}$] $R_x(0) \ge R_x(\tau)$.
+    \item[$\pmb{\star}$] $R_x(-\tau) = R_x(\tau)$, a autocorrelação é uma função par. 
+\end{enumerate}
+
+%//==============================--@--==============================//%
+\newpage
+\subsection{1.2 Análise de Fourier}
+\label{subsec:fourier-analysis}
+
+\begin{theo}[\underline{Séries de Fourier}]{def:fourier-series}\label{def:fourier-series}
+    Seja $x(t)$ um sinal periódico, de período $T$, que verifica as \underline{condições de Dirichlet}:
+    
+    \vspace{-0.75em}
+    \begin{enumerate}[leftmargin=2em]
+        \item[$\pmb{1.}$] $x(t)$ é absolutamente integrável num intervalo correspondente a um período:
+        $$
+            \int_T \left|x(t)\right|\, dt < +\infty
+        $$
+        \item[$\pmb{2.}$] O número de máximos e mínimos de $x(t)$ num intervalo $T$, \underline{é finito}.
+        
+        \item[$\pmb{3.}$] O número de descontinuidades de $x(t)$ em cada intervalo, \underline{é finito}.
+    \end{enumerate}
+
+    \noindent Satisfazendo estas condições, define-se a Série de Fourier correspondente ao sinal $x(t)$ como
+    $$
+        \boxed{\tilde{x}(t) = \sum_{n=-\infty}^{+\infty} c_n e^{j2\pi n f_0 t},\quad f_0 \delequal \frac{1}{T}}
+    $$
+    onde
+    $$
+    \tilde{x}(t) =
+    \begin{cases}
+        x(t) & \text{se $x(t)$ for continuo em $t$} \\
+        \frac{x(t^-) + x(t^+)}{2} & \text{se $x(t)$ for descontinuo em $t$.}
+    \end{cases}
+    $$
+    Os coeficientes da Série de Fourier são dados por
+    $$
+        c_n = \frac{1}{T} \int_T x(t) e^{-j 2\pi n f_0 t}\, dt
+    $$
+
+    \vspace{0.5em}
+    \noindent $\pmb{\rightarrow}$ \textbf{Nota:} Se $x(t)$ é real, então \underline{$c_{-n} = c_{n}^*$}, e segue que: 
+    
+    \vspace{-0.75em}
+    \begin{enumerate}[leftmargin=2em]
+        \item[$\pmb{\star}$] Se $x(t)$ for \underline{real e par}, então os coeficientes são todos reais $\rightarrow$ $c_{-n} = c_{n}$. 
+        
+        \item[$\pmb{\star}$] Se $x(t)$ for \underline{real e ímpar}, então os coeficientes são imaginários $\rightarrow$ $c_{-n} = -c_{n}$.
+    \end{enumerate}
+\end{theo}
+
+%\newpage
+\begin{theo}[\underline{Transformada de Fourier}]{def:fourier-transform}\label{def:fourier-transform}
+    Seja $x(t)$ um sinal que verifica as \underline{condições de Dirichlet}:
+    
+    \vspace{-0.5em}
+    \begin{enumerate}[leftmargin=2em]
+        \item[$\pmb{1.}$] $x(t)$ é absolutamente integrável na linha dos reais:
+        $$
+            \int_{\mathbb{R}} \left|x(t)\right|\, dt < +\infty
+        $$
+        \item[$\pmb{2.}$] O número de máximos e mínimos de $x(t)$ em qualquer intervalo finito, \underline{é finito}.
+        
+        \item[$\pmb{3.}$] O número de descontinuidades de $x(t)$ em qualquer intervalo finito, \underline{é finito}.
+    \end{enumerate}
+
+    \noindent Define-se o par de equações relativo à Transformada de Fourier de $x(t)$ como
+    \begin{align*}
+        X(f) = \mathcal{F}\{x(t)\} &\delequal \int_{\mathbb{R}} x(t) e^{-j2\pi ft}\, dt & \text{\underline{Equação de análise}}\\
+        x(t) = \mathcal{F}^{-1}\{X(f)\} &\delequal \int_{\mathbb{R}} X(f) e^{j2\pi ft}\, df & \text{\underline{Equação de síntese}}
+    \end{align*}%hewo :3  adoro-te totalmente
+
+    \vspace{0.5em}
+    \noindent $\pmb{\rightarrow}$ \textbf{Nota:} $X(f)$ é denominado por espectro de $x(t)$.
+\end{theo}
+
+\begin{theo}[\underline{Relação entre a Série e a Transformada de Fourier}]{def:fourier-relation}\label{def:fourier-relation}
+\noindent Se $\tilde{x}(t)$ for a extensão periódica de $x(t)$ (truncado, ou absolutamente integrável---como um pulso), com período $T$, os coeficientes da sua Série de Fourier, $c_n$, relacionam-se com a Transformada de Fourier de $x(t)$:
+    $$
+        c_n = \frac{1}{T} X(nf_0)
+    $$
+    A Transformada de Fourier de um sinal periódico é: 
+    $$
+        \tilde{X}(f) = \sum_{n=-\infty}^{+\infty} c_n \delta(f - n f_0)
+    $$
+\end{theo}
+
+%//==============================--@--==============================//%
+\subsection{1.3 Teoremas de Wiener–Khinchin, Rayleigh e de Parseval}
+\label{subsec:wierner-khinchin-parseval}
+
+\begin{theo}[\underline{Teorema da Energia de Rayleigh} (Teorema de Parseval)]{def:parseval-rayleigh}\label{def:parseval-rayleigh}
+    $$
+        E_x = \int_{\mathbb{R}} \left| x(t) \right|^2\, dt = \int_{\mathbb{R}} \left| X(f) \right|^2\, df = \int_{\mathbb{R}} \psi_x(f)\, df
+    $$
+    ``(...) the total energy of a Fourier-transformable signal equals the total area under the curve of squared amplitude spectrum of this signal.''\cite{Haykin2007}
+
+    \noindent $\pmb{\star}$ A quantia $\psi_x(f) \delequal \left| X(f) \right|^2$ é denominada por \textit{densidade espectral energética} ou \textit{espectro energético} de $x(t)$.
+\end{theo}
+
+\begin{theo}[\underline{Teorema de Parseval} (da potência)]{def:parseval-power}\label{def:parseval-power}
+    Para sinais periódicos que podem ser representados sobre uma Série de Fourier, existe uma relação para a potência entre o domínio do tempo e da frequência.
+    $$
+        P_x = \frac{1}{T} \int_{T} \left| x(t) \right|^2 = \sum_{n=-\infty}^{+\infty} \left| c_n \right|^2
+    $$
+    em que $c_n$ são os coeficientes da Série de Fourier complexa.
+\end{theo}
+
+\begin{theo}[\underline{Teorema de Wiener-Khinchin}]{def:wierner-khinchin}\label{def:wierner-khinchin}
+    $$
+        S_x(f) = \int_{\mathbb{R}} R_x(\tau)\, e^{-j2\pi f \tau}\, d\tau 
+        \quad \land \quad 
+        R_x(\tau) = \int_{\mathbb{R}} S_x(f)\, e^{j2\pi f \tau}\, df
+    $$
+
+    \noindent Para sinais de energia:
+    \begin{align*}
+        \psi_x(f) &= \mathcal{F}\{R_x(\tau)\} = \int_{\mathbb{R}} R_x(\tau)\, e^{-j2\pi f \tau}\, d\tau \\
+        R_x(\tau) &= \mathcal{F}^{-1}\{\psi_x(f)\} = \int_{\mathbb{R}} \psi_x(f)\, e^{j2\pi f \tau}\, df
+    \end{align*}
+
+    \noindent Para sinais periódicos que podem ser desenvolvidos numa Série de Fourier:
+    \begin{align*}
+        S_x(f) &= \mathcal{F}\{R_x(\tau)\} = \sum_{n=-\infty}^{+\infty} \left| c_n \right|^2 \delta(f-nf_0) \\
+        R_x(\tau) &= \mathcal{F}^{-1}\{S_x(\tau)\}
+    \end{align*}
+
+    \vspace{0.25em}
+    \noindent $\pmb{\rightarrow}$ \textbf{Nota:} $S_x(f)$ é a \textit{densidade espectral de potência} de $x(t)$; indica a distribuição da potência do sinal ao longo do domínio da frequência.
+\end{theo}
+%//==============================--@--==============================//%

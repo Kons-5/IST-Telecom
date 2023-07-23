@@ -1,0 +1,102 @@
+\clearpage
+%//==============================--@--==============================//%
+\subsection[5.2 PSK (\textit{Phase-Shift Keying})]{$\rightarrow$ PSK (\textit{Phase-Shift Keying})}
+\label{subsec:M-PSK}
+\begin{mdframed}
+Uma sequência $\xi$ de $K$ símbolos é transportada pelo sinal
+$$
+    v_\xi(t) = \mathbb{R}e\left\{ \sum_{k=0}^{K-1} \xi_k\, s(t-kT) e^{j2\pi f_c t} \right\},\quad 0 \leq t \leq KT
+$$
+onde $\xi_k = e^{j\phi_k}$, e cada fase discreta $\phi_k$ toma valores no conjunto
+$$
+    \left\{ \frac{2\pi}{M}(i-1) + \Phi \right\}_{i=1}^{M}
+$$
+em que $\Phi$ é uma constante de fase arbitrária. Assume-se que a forma de onda do modulador é retangular, i.e., $s(t) \equiv u_T(t)$ um pulso retangular de amplitude A e duração T, de tal forma que o envelope do sinal PSK seja constante (são possíveis outras formas de onda, mas assumimos esta). Podemos escrever explicitamente
+\begin{align*}
+    v_\xi(t) &= A\sum_{k=0}^{K-1} u_T(t-kT)\cos(2\pi f_c t + \phi_k) = \\
+    &= I(t) \cos(2\pi f_c t) - Q(t) \sin(2\pi f_c t)
+\end{align*}
+definimos então as componentes em fase e em quadratura do sinal PSK:
+$$
+    I(t) \delequal A\sum_{k=0}^{K-1} \cos(\phi_k) u(t-kT)
+$$
+$$
+    Q(t) \delequal A\sum_{k=0}^{K-1} \sin(\phi_k) u(t-kT)
+$$
+\end{mdframed}
+%//==============================--@--==============================//%
+\vspace{-1em}
+\subsubsection[5.2.1 Probabilidade de erro]{$\rightarrow$ Probabilidade de erro}
+Na forma geral, para um sinal $M$-PSK, podemos definir os limites superiores e inferiores de $P(e)$. Aqui $E_b = E/\log_2(M)$, e então, temos
+$$
+    \frac{1}{2}\, \text{erfc}\left( \sqrt{\frac{E_b}{N_0}\log_2(M)} \sin{\frac{\pi}{M}} \right) \leq P(e) \leq \text{erfc}\left( \sqrt{\frac{E_b}{N_0}\log_2(M)} \sin{\frac{\pi}{M}} \right)
+$$
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[4]{%
+    A \textit{power efficiency} assintótica da modulação PSK é 
+    $$
+        \gamma_{\text{PSK}} = \sin^2\left(\frac{\pi}{M}\right) \cdot \log_2(M) 
+    $$
+    que se verifica decrescente para valores de $M$ cada vez maiores.
+}
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+%//==============================--@--==============================//%
+\vspace{-1em}
+\subsubsection[5.2.2 Espectro de potência e eficiência espectral]{$\rightarrow$ Espectro de potência e eficiência espectral}
+
+A densidade espectral de potência do sinal PSK é dada por
+$$
+    S_{v_\xi}(f) = \frac{1}{4}[S(-f-f_0) + S(f-f_0)]
+$$
+onde $S(f)$ representa a Transformada de Fourier de $s(t)$ (\textit{vide} secção sobre \hyperref[teo/def:LineCodes]{código de linha}).
+
+\vspace{0.5em}
+\noindent Dado que $N=2$, a largura de banda de Shannon para esta modulação é $W = 1/T$, e então, a eficiencia espectral é dada por
+$$
+    \left(\frac{R_s}{W}\right)_{\text{ASK}} = \log_2(M)
+$$
+
+\vspace{0.5em}
+\noindent Conclui-se que para PSK, ao aumentar o valor de $M$ ocorre também melhoria na eficiência da largura de banda, verifica-se uma diminuição da \textit{power efficiency}.
+
+%//==============================--@--==============================//%
+\newpage
+\subsubsection[5.2.3 Exercícios]{$\pmb{\rightarrow}$ Exercícios}
+\paragraph[5.2.3.1 Oscilador com erro de fase]{$\pmb{\star}$ Considere um sistema PSK binário com formas de onda equiprováveis $\pmb{s_1(t) = \cos(2\pi f_c t) = -s_2(t)}$. No detetor de filtro adaptado a referência é $\pmb{\cos(2\pi f_c t + \phi)}$, em que $\pmb{\phi}$ é um erro de fase. Calcule a probabilidade de erro de bit.}\mbox{}\\
+
+\noindent Partindo de 
+$$
+    r(t) = s_i(t) + n(t)\quad\land\quad s_i(t) = \pm \cos(2\pi f_c t),\quad i = 1,2
+$$
+
+\begin{align*}
+    \rightarrow \int _{0}^{T_b} \cos(2\pi f_c t) \cos(2\pi f_c t + \phi)\, dt &= \int _{0}^{T_b} \cos(2\pi f_c t) \left[ \cos(2\pi f_c t)\cos(\phi) - \sin(2\pi f_c t)\sin(\phi) \right]\, dt = \\
+    &= \int _{0}^{T_b} \left[ \cos(2\pi f_c t)\right]^2 \cos(\phi)\, dt - 0 = \\
+    &= \frac{1}{2}\cos(\phi)\, T_b
+\end{align*}
+
+\vspace{0.75em}
+\noindent $\rightarrow r_1 = s_{11} + n_1$ com $\mathbb{E}[r_1] = 1/2 \cos(\phi)\, T_b$, dado que $\mathbb{E}[n_1]$ (valor esperado de um processo gaussiano) é nulo.
+\begin{align*}
+    \sigma^2_{r_1} &= \mathbb{E}[(r_1 - \mu)^2] = \mathbb{E}[n_1^2] = \\
+    &= \mathbb{E}\left[ \int_{0}^{T_b} n(t) \cos(2\pi f_c t + \phi) \, dt\; \int_{0}^{T_b} n(u) \cos(2\pi f_c u + \phi) \, du \right] = \\
+    &= \int_{0}^{T_b} \int_{0}^{T_b} \cos(2\pi f_c u + \phi) \cos(2\pi f_c t + \phi)\, \mathbb{E}[n(t) n(u)] \, du\, dt = \\
+    &= \int_{0}^{T_b} \int_{0}^{T_b} \cos(2\pi f_c u + \phi) \cos(2\pi f_c t + \phi)\, R_n(t,u)\, du\, dt = \\
+    &= \frac{N_0}{2} \int_{0}^{T_b} \int_{0}^{T_b} \cos(2\pi f_c u + \phi) \cos(2\pi f_c t + \phi)\, \delta(t-u)\, du\, dt = \\
+    &= \frac{N_0}{2} \int_{0}^{T_b} \left[\cos(2\pi f_c u + \phi)\right]^2\, du = \\
+    &= \frac{N_0}{2} \int_{0}^{T_b} \left[ \frac{1}{2} + \frac{1}{2}\cos(4\pi f_c u + 2\phi) \right]\, du = \frac{N_0 T_b}{4} + \frac{N_0}{4}\int_{0}^{T_b} \cos(4\pi f_c u + 2\phi)\, du = \\
+    &= \frac{N_0 T_b}{4} + \frac{N_0}{4} \int_{2\phi}^{4\pi f_c T_b + 2\phi} \cos(x)\, \frac{dx}{4\pi f_c} = \frac{N_0 T_b}{4} + \frac{N_0}{16\pi f_c}\; \cancelto{0,\, \because \textit{bandpass}}{\Bigr[\sin(x)\Bigr]_{2\phi}^{4\pi f_c T_b + 2\phi}} = \\
+    &= \frac{N_0 T_b}{4}
+\end{align*}
+
+\vspace{0.75em}
+\noindent Dado que as formas de onda são equiprováveis e antipodais
+$$
+    \therefore \frac{1}{2}\, \text{erfc}\left(\frac{d/2}{\sqrt{2}\sigma}\right) = \frac{1}{2}\, \text{erfc}\left(\frac{1/2 \cos(\phi)\, T_b}{\sqrt{2}\sqrt{N_0 T_b/4}}\right) = \frac{1}{2} \, \text{erfc}\left( \sqrt{\frac{E_b}{N_0}} \cos(\phi) \right)
+$$
+
+\vspace{0.75em}
+\noindent $\pmb{\rightarrow}$ \textbf{Notas:} 
+$$R_n(t,u) = N_0/2 \cdot \delta(t-u)$$
+$$E_b = \int_{0}^{T_b} [s_1(t)]^2\, dt = T_b/2$$
