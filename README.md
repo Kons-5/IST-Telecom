@@ -1,4 +1,4 @@
-# CEB - Electronic Circuits
+# T - Telecommunications
 
 This repository contains `Telecom.pdf`, a work-in-progress PDF that aims to summarize the content covered in a Telecommunications class.
 
